@@ -105,7 +105,7 @@ body {
     font-size: 0.95rem;
     font-weight: 500;
     letter-spacing: 0.05em;
-    text-transform: uppercase;
+    /* text-transform: uppercase; - Eliminado para Sentence Case */
     transition: color var(--transition-speed) ease;
     padding: 0.5rem 0;
     position: relative;
@@ -217,10 +217,11 @@ body {
 .form-panel {
     background-color: rgba(255, 255, 255, 0.85); /* Mayor transparencia (85%) */
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: 24px;
-    padding: 3.5rem;
+    padding: 2.5rem;
     width: 100%;
-    max-width: 550px;
+    max-width: 800px; /* Incrementado para doble columna */
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.3);
     margin: 0 auto;
@@ -240,15 +241,32 @@ body {
 
 .form-header p {
     color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.mandatory-note {
+    font-size: 0.8rem !important;
+    color: #ef4444 !important;
+    font-weight: 500;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
 }
 
 .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+/* Campos que ocupan todo el ancho (Mensaje, Privacidad, Botón) */
+.full-width, .privacy-checks, .submit-btn {
+    grid-column: span 2;
 }
 
 .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     position: relative;
 }
 
@@ -258,6 +276,11 @@ body {
     font-weight: 600;
     color: var(--primary-color);
     margin-bottom: 0.4rem;
+}
+
+.required {
+    color: #ef4444;
+    margin-left: 2px;
 }
 
 input, select, textarea {
@@ -490,23 +513,77 @@ select {
 }
 
 /* Mobile Responsive */
-/* SEO Footer (Discreet) */
+/* SEO Footer & Legal (Discreet) */
 .seo-footer {
     width: 100%;
-    padding: 2rem;
+    padding: 3rem 2rem;
     text-align: center;
     background: transparent;
     position: relative;
     z-index: 10;
 }
 
-.seo-footer p {
-    max-width: 800px;
+.footer-content {
+    max-width: 1000px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.seo-text {
     font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.4); /* Muy discreto */
-    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.6;
     font-weight: 300;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+}
+
+.legal-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.legal-links a {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 0.75rem;
+    transition: color 0.2s;
+}
+
+.legal-links a:hover {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+.credits {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.3);
+    margin-top: 0.5rem;
+}
+
+.integra-cloud {
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .full-width, .privacy-checks, .submit-btn {
+        grid-column: span 1;
+    }
 }
 
 @media (max-width: 992px) {
