@@ -45,11 +45,11 @@
 
             <nav class="nav-menu" id="navMenu">
                 <ul>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#expertos">Expertos</a></li>
-                    <li><a href="#propiedades">Propiedades</a></li>
-                    <li><a href="#investigacion">Investigación</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="https://www.colliers.com/es-cl/servicios" target="_blank">Servicios</a></li>
+                    <li><a href="https://www.colliers.com/es-cl/expertos#sort=%40firstz32xname%20ascending" target="_blank">Expertos</a></li>
+                    <li><a href="https://www.colliers.com/es-cl/propiedades#sort=relevancy&f:listingtype=[Todas%20las%20propiedades]&f:recenttransactions=[0]" target="_blank">Propiedades</a></li>
+                    <li><a href="https://www.colliers.com/es-cl/investigacion#sort=%40datez32xpublished%20descending" target="_blank">Investigación</a></li>
+                    <li><a href="https://www.colliers.com/es-cl/about" target="_blank">Nosotros</a></li>
                 </ul>
             </nav>
         </div>
@@ -277,8 +277,32 @@
             }
 
             if (isValid) {
+                // Preparar datos para el correo
+                const nombre = document.getElementById('nombre').value;
+                const apellido = document.getElementById('apellido').value;
+                const help = helpSelect.options[helpSelect.selectedIndex].text;
+                const workstations = document.getElementById('workstations').value;
+                const email = document.getElementById('correo').value;
+                const phone = document.getElementById('telefono').value;
+                const message = document.getElementById('mensaje').value;
+
+                let body = `Nombre: ${nombre} ${apellido}%0D%0A`;
+                body += `Interés: ${help}%0D%0A`;
+                if (workstations) body += `Puestos de trabajo: ${workstations}%0D%0A`;
+                body += `Email: ${email}%0D%0A`;
+                body += `Teléfono: ${phone}%0D%0A`;
+                body += `Mensaje: ${message}`;
+
+                const mailtoLink = `mailto:oficinas@colliers.cl?subject=Nuevo Lead de Landing Formulario&body=${body}`;
+                
+                // Abrir el cliente de correo
+                window.location.href = mailtoLink;
+
+                // Mostrar mensaje de éxito en la landing
                 form.style.display = 'none';
-                document.querySelector('.main-title').style.display = 'none';
+                if (document.querySelector('.main-title')) {
+                    document.querySelector('.main-title').style.display = 'none';
+                }
                 const successMsg = document.getElementById('successMessage');
                 successMsg.style.display = 'flex';
                 setTimeout(() => {
