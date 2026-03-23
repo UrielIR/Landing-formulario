@@ -129,7 +129,7 @@
 
                         <!-- 7. Mensaje -->
                         <div class="form-group full-width">
-                            <label for="mensaje">Mensaje</label>
+                            <label for="mensaje">Mensaje <span class="required">*</span></label>
                             <textarea id="mensaje" name="mensaje" rows="3" placeholder="Cuéntanos más sobre tus requerimientos..." required></textarea>
                             <span class="error-msg">Por favor, escribe tu mensaje</span>
                         </div>
@@ -209,6 +209,12 @@
     </div>
 
     <script>
+        // Limpiar el formulario al recargar la página para evitar persistencia no deseada
+        window.addEventListener('load', () => {
+            const form = document.getElementById('officeForm');
+            if (form) form.reset();
+        });
+
         // Navbar scroll effect
         const header = document.getElementById('mainHeader');
         window.addEventListener('scroll', () => {
